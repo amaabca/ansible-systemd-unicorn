@@ -1,0 +1,16 @@
+[Unit]
+Description=systemd config for a rails unicorn process
+
+[Service]
+Type=simple
+SyslogIdentifier=unicorn
+User={{ ansible_systemd_unicorn_user }}
+PIDFile={{ ansible_systemd_unicorn_app_path }}/shared/tmp/pids/unicorn.pid
+WorkingDirectory={{ ansible_systemd_unicorn_app_path }}/current/
+ExecStart=bundle exec unicorn -c ./config/unicorn.rb -R {{ ansible_systemd_unicorn_rack_env }} -D && flock -x 0 < "$MAINPID.lock"
+ExecReload=/bin/kill -s USR2 $MAINPID
+ExecStop=/bin/kill -s QUIT $MAINPID
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
