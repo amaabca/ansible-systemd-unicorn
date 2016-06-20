@@ -3,9 +3,5 @@
 - name: Unicorn | Copy systemd template to systemd multiuser directory
   template: src=unicorn_systemd dest=/lib/systemd/system/unicorn.service owner=root group=root
   sudo: yes
-- name: enable unicorn service
-  systemd:
-    name: unicorn
-    daemon_reload: yes
-    enabled: yes
-    state: reload
+- command: systemctl daemon-reload
+  sudo: yes
