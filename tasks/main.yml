@@ -1,2 +1,5 @@
 ---
 # tasks file for ansible_systemd_unicorn
+- name: Unicorn | Copy systemd template to systemd multiuser directory
+  template: src=unicorn_systemd dest=/etc/systemd/system/multi-user.target.wants owner=root group=root
+  sudo: yes
