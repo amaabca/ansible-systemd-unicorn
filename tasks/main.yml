@@ -1,5 +1,11 @@
 ---
 # tasks file for ansible_systemd_unicorn
 - name: Unicorn | Copy systemd template to systemd multiuser directory
-  template: src=unicorn_systemd dest=/etc/systemd/system/multi-user.target.wants owner=root group=root
+  template: src=unicorn_systemd dest=/lib/systemd/system/unicorn.service owner=root group=root
   sudo: yes
+- name: enable unicorn service
+  systemd:
+    name: unicorn
+    daemon_reload: yes
+    enabled: yes
+    state: reload
