@@ -1,2 +1,5 @@
 ---
 # defaults file for ansible_systemd_unicorn
+ansible_systemd_unicorn_app_path: '/srv/{{ app_name }}'
+ansible_systemd_unicorn_rack_env: 'deployment'
+ansible_systemd_unicorn_user: '{{ deployer }}'
