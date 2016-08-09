@@ -5,5 +5,7 @@
   sudo: yes
 - command: systemctl daemon-reload
   sudo: yes
+- command: systemctl enable unicorn
+  becomes: yes
 - command: systemctl start unicorn
   sudo: yes
