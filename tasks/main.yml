@@ -2,13 +2,13 @@
 # tasks file for ansible_systemd_unicorn
 - name: Unicorn | Copy systemd template to systemd multiuser directory
   template: src=unicorn_systemd dest=/lib/systemd/system/unicorn.service owner=root group=root
-  becomes: yes
+  become: yes
 - name: reload the systemd process after modifying config file
   command: systemctl daemon-reload
-  becomes: yes
+  become: yes
 - name: configure unicorn to restart on reboot
   command: systemctl enable unicorn
-  becomes: yes
+  become: yes
 - name: explicitly start unicorn
   command: systemctl start unicorn
-  becomes: yes
+  become: yes
